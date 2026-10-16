@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Marketing Portfolio | Aliven Solutions</title>
+  <meta name="description" content="Digital marketing campaigns by Aliven Solutions." />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+    .cat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .cat-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+    .cat-card-img {
+      height: 180px;
+      background: linear-gradient(135deg, #1e1033, #2d1b4e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--primary-light);
+    }
+    .cat-card-body {
+      padding: 24px;
+    }
+    .cat-card-body h3 {
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+    }
+    .cat-card-body p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+    .cat-tag {
+      display: inline-block;
+      background: rgba(124, 58, 237, 0.15);
+      color: var(--primary-light);
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary-light);
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+    .back-link:hover { gap: 12px; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-left">
+        <a href="mailto:alivensolutions@gmail.com"><i class="fas fa-envelope"></i> info@alivensolutions.com</a>
+        <span><i class="fas fa-map-marker-alt"></i> 8600 River Way Unit 9, Berrien Springs, MI 49104</span>
+      </div>
+      <div class="top-right">
+        <a href="https://www.instagram.com/alivensolutions/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=100065460550997&sk=directory_contact_info"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.linkedin.com/company/aliven-solutions" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:alivensolutions@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <img src="images/pic.jpg" alt="Aliven Solutions" />
+        <span>ALIVEN <strong>SOLUTIONS</strong></span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html" class="active">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a href="contact.html" class="btn btn-primary nav-cta">Get A Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Digital Marketing Portfolio</h1>
+      <p>Campaigns that grew engagement, reach and conversions.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <a href="portfolio.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+      <div class="cat-grid">
+        <div class="cat-card">
+          <div class="cat-card-img"><i class="fas fa-bullhorn"></i></div>
+          <div class="cat-card-body">
+            <h3>Brand Awareness Campaign</h3>
+            <p>Multi-channel campaign that significantly increased brand mentions and reach.</p>
+            <span class="cat-tag">Social + Content</span>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-card-img"><i class="fas fa-users"></i></div>
+          <div class="cat-card-body">
+            <h3>Social Media Growth</h3>
+            <p>Grew Instagram and Facebook following with consistent creatives and strategy.</p>
+            <span class="cat-tag">SMM</span>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-card-img"><i class="fas fa-ad"></i></div>
+          <div class="cat-card-body">
+            <h3>Lead Generation Campaign</h3>
+            <p>Meta and Google ads that delivered qualified leads under target CPA.</p>
+            <span class="cat-tag">Paid Social</span>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-card-img"><i class="fas fa-envelope"></i></div>
+          <div class="cat-card-body">
+            <h3>Email Nurture Sequence</h3>
+            <p>Automated email flows that improved open rates and conversions.</p>
+            <span class="cat-tag">Email Marketing</span>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-card-img"><i class="fas fa-hashtag"></i></div>
+          <div class="cat-card-body">
+            <h3>Influencer Collaboration</h3>
+            <p>Coordinated influencer posts that boosted product launch visibility.</p>
+            <span class="cat-tag">Influencer</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Start Your Project?</h2>
+      <p>Let’s create something amazing together.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg">Get Free Consultation</a>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="images/pic.jpg" alt="Aliven Solutions" />
+            <span>ALIVEN <strong>SOLUTIONS</strong></span>
+          </a>
+          <p>Web Development | App Development | Video Editing | Graphic Design | Digital Marketing | PPC | SEO | AI Services | Animation</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/alivensolutions/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100065460550997&sk=directory_contact_info"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/aliven-solutions" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:alivensolutions@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#web">Web Development</a></li>
+            <li><a href="services.html#app">App Development</a></li>
+            <li><a href="services.html#video">Video Editing</a></li>
+            <li><a href="services.html#graphic">Graphic Design</a></li>
+            <li><a href="services.html#digital">Digital Marketing</a></li>
+            <li><a href="services.html#seo">SEO</a></li>
+            <li><a href="services.html#ai">AI Services</a></li>
+            <li><a href="services.html#animation">Animation</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact Info</h4>
+          <ul>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:alivensolutions@gmail.com">info@alivensolutions.com</a></li>
+            <li><i class="fas fa-globe"></i> <a href="https://alivensolutions.com">alivensolutions.com</a></li>
+            <li><i class="fas fa-map-marker-alt"></i> 8600 River Way Unit 9, Berrien Springs, MI 49104</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Aliven Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

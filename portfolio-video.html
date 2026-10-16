@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video Editing Portfolio | Aliven Solutions</title>
+  <meta name="description" content="Video editing portfolio — ads, reels, documentaries, motion graphics and more by Aliven Solutions." />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--primary-light); font-weight: 600; margin-bottom: 30px;
+    }
+    .back-link:hover { gap: 12px; }
+    .video-cat {
+      margin-bottom: 48px;
+    }
+    .video-cat h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .video-cat .cat-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 22px;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .video-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .video-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+    .video-thumb {
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, #1a0a2e, #2d1b4e);
+      position: relative;
+      overflow: hidden;
+    }
+    .video-thumb .thumb-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .video-thumb iframe {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: calc(100% + 48px);
+      top: -48px;
+      border: 0;
+      z-index: 1;
+    }
+    .video-thumb .drive-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      z-index: 4;
+      background: transparent;
+      pointer-events: none;
+      display: none;
+    }
+    .video-thumb.playing .drive-mask {
+      display: block;
+    }
+    .video-thumb .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10,6,18,0.25);
+      transition: background 0.3s, opacity 0.3s;
+      z-index: 3;
+      width: 100%;
+      padding: 0;
+    }
+    .video-card:hover .play-overlay {
+      background: rgba(10,6,18,0.1);
+    }
+    .video-thumb.playing .play-overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .play-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 4;
+    }
+    .play-actions .action-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.35);
+      background: rgba(10, 6, 18, 0.65);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s, border-color 0.2s;
+      backdrop-filter: blur(8px);
+    }
+    .play-actions .action-btn:hover {
+      transform: scale(1.08);
+      background: rgba(124, 58, 237, 0.85);
+      border-color: rgba(196, 181, 253, 0.7);
+    }
+    .play-actions .action-btn.primary {
+      width: 64px;
+      height: 64px;
+      border-width: 2px;
+      background: rgba(124, 58, 237, 0.75);
+      border-color: rgba(196, 181, 253, 0.6);
+    }
+    .play-actions .action-btn.primary:hover {
+      background: rgba(124, 58, 237, 0.95);
+    }
+    .play-actions .action-btn i {
+      font-size: 1.15rem;
+      pointer-events: none;
+    }
+    .play-actions .action-btn.primary i {
+      font-size: 1.45rem;
+    }
+
+    .video-thumb:fullscreen,
+    .video-thumb:-webkit-full-screen {
+      aspect-ratio: auto;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+    .video-thumb:fullscreen iframe,
+    .video-thumb:-webkit-full-screen iframe {
+      width: 100%;
+      height: calc(100% + 70px);
+      top: -60px;
+    }
+    .video-thumb:fullscreen .drive-mask,
+    .video-thumb:-webkit-full-screen .drive-mask {
+      height: 12px;
+      background: transparent;
+    }
+    .video-body {
+      padding: 16px 18px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .video-body h3 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: #fff;
+      line-height: 1.35;
+    }
+    .video-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      background: var(--gradient);
+      color: #fff !important;
+      padding: 9px 16px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      align-self: flex-start;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .video-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(124,58,237,0.35);
+      color: #fff !important;
+    }
+    .cat-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .cat-nav a {
+      padding: 8px 16px;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .cat-nav a:hover {
+      border-color: var(--primary);
+      color: var(--primary-light);
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-left">
+        <a href="mailto:alivensolutions@gmail.com"><i class="fas fa-envelope"></i> info@alivensolutions.com</a>
+        <span><i class="fas fa-map-marker-alt"></i> 8600 River Way Unit 9, Berrien Springs, MI 49104</span>
+      </div>
+      <div class="top-right">
+        <a href="https://www.instagram.com/alivensolutions/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=100065460550997&sk=directory_contact_info"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.linkedin.com/company/aliven-solutions" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:alivensolutions@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <img src="images/pic.jpg" alt="Aliven Solutions" />
+        <span>ALIVEN <strong>SOLUTIONS</strong></span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html" class="active">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a href="contact.html" class="btn btn-primary nav-cta">Get A Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Video Editing Portfolio</h1>
+      <p>Ads, reels, documentaries, motion graphics, podcasts and more.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <a href="portfolio.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+
+      <div class="cat-nav">
+        <a href="#ads">Ads</a>
+        <a href="#documentary">Documentary</a>
+        <a href="#motion">Motion Graphics</a>
+        <a href="#podcast">Podcast</a>
+        <a href="#realestate">Real Estate</a>
+        <a href="#reels">Short &amp; Reel</a>
+        <a href="#talking">Talking Head</a>
+      </div>
+
+      <div class="video-cat" id="ads">
+        <h2>Ads Work</h2>
+        <p class="cat-desc">Commercial and promotional video ads.</p>
+        <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1vmZIrpoKlP8hTFmpsKOYQMyZWZsol17m/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Ad 1 — Documentary Style" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Ad 1 — Documentary Style</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1UP03pU4dy65ZBMfo9aiDUi3ets1Po_qp/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Food Cinematic" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Food Cinematic</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1xWRrH1zmh6G76okSwYZ6VVuSc-Ae0DxO/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Glasses Cinematic" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Glasses Cinematic</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1w4NDfZeyzfpDL4XF8f8yE3zIBdX8s3Wg/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Marketing Ad" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Marketing Ad</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1RtkYs90YqSOsHB4g7Lg-PwdQZ8ijBSyd/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Pearl Heaven" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Pearl Heaven</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1c-k8Ox1xNfG-xbyOQDBJfd5b9KKRlWMR/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Promo Ad" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Promo Ad</h3>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="video-cat" id="documentary">
+        <h2>Documentary Video Work</h2>
+        <p class="cat-desc">Story-driven documentary edits and snippets.</p>
+        <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/13s3dQj3CrH2AUkYHA9d32__83RAGXSEq/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Documentary 01" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Documentary 01</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/19kXcTutUPt9A-Cc6WuhlqUrPKPl7gp3U/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Crime Documentary" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Crime Documentary</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1FRXA860elBus5Doi4BWT_4tKWqdN1qTp/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Mafia Snippet Sample" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Mafia Snippet Sample</h3>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="video-cat" id="motion">
+        <h2>Motion Graphic Work</h2>
+        <p class="cat-desc">After Effects motion graphics and animated sequences.</p>
+        <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1Hxj8EKsR2VU4QFBIM0u3AumpGtw8_wgD/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Motion Sample 01" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Motion Sample 01</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1thTGFiVKn_2juvriPGKDaffOLQm_fa9g/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play 1st Sample" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>1st Sample</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1rndAQZuT6gCia9bUimvMr3NeXaoe0Ers/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play After Effects 1" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>After Effects 1</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1nCyagMMTbzjRITkAasTdMusvouG8_J15/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Anuska Rathod" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Anuska Rathod</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1JN1-LRmE5IL30zmVCE8B58Bmmtk8Ly1Q/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Precut Edit v1" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Precut Edit v1</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1cbNoi-xD2uXDPiCkjMVU5Ce5HiAOb_Jg/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Sketch Flow Final" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Sketch Flow Final</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1k2NaBJZqtCeBZIyGgXMs2gDTXEZekezq/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Spotify Motion" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Spotify Motion</h3>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="video-cat" id="podcast">
+        <h2>Podcast Work</h2>
+        <p class="cat-desc">Podcast intros and sample edits.</p>
+        <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1iBsVseVNjWaUTKcyc9_t9T-3iSnJneFC/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Podcast Intro 1" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Podcast Intro 1</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/16RS0s0QY3za9srtI7t2ywHVZvlO6n5Hj/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Podcast Sample" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Podcast Sample</h3>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="video-cat" id="realestate">
+        <h2>Real Estate Work</h2>
+        <p class="cat-desc">Property showcases and real estate reels.</p>
+        <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1mh6fz7Ay6wTTVKh15pvn9UvAI0q1tk37/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Real Estate 1" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Real Estate 1</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1jvRML5ObrqYddS4IvQW4gylC-qkL6A9k/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Real Estate 2" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Real Estate 2</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1R20zc-swDAYd-VgyVGwePycfjYku6A9n/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Real Estate Reel" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Real Estate Reel</h3>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="video-cat" id="reels">
+        <h2>Short &amp; Reel</h2>
+        <p class="cat-desc">Social media shorts, reels and vertical content.</p>
+        <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1ju1UKBCMopKwqc1bWKE_7KYOnsNtJ2Ls/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Reel 0530" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Reel 0530</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1nxfrJKkplrIfNnfOaslGbpaaxVJHeSu1/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Add 1" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Add 1</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1aTR9H0MmXpFgXT4f1knXG1bnzYBcJ-cQ/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Alec" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Alec</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1uxkGYCjMtKW0kqPQznT5jETzzDrY2obh/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Client Sent" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Client Sent</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1O1MqiO9ExnuHJpBtchVhD1Pq0ghvcJH1/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Forex Reel" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Forex Reel</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1pukU6qSLnWGjy4LJlkoTYdyrRlWNtdAd/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Marketing 2" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Marketing 2</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1SwYv-GDIymSqoXkiR5Gmrq63PnyeScO2/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Marketing Reel" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Marketing Reel</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1FKt1gjsLPX-mhAlOuO_K-JXMpKVq0kEv/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Real Estate Reel" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Real Estate Reel</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1UqG-S4c5T-kYgaMDE19eZqOWt_g8lzfo/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Reel" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Reel</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1x2Nr80D3vAKa2bv93AakHaZ-QlB2R7Pl/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Reel 1" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Reel 1</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1fXLgDqZNShlqgKWA4XElSU_b_h8zCt4X/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Reel 2" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Reel 2</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1E6d0x2orCfmANwoTxJLmC3ccewR5A6Kt/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Sample 2" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Sample 2</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1aPoAY3UQJViAtdoStCUwYSqpu-OrOtes/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Sample" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Sample</h3>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="video-cat" id="talking">
+        <h2>Talking Head</h2>
+        <p class="cat-desc">Talking head interviews and presenter edits.</p>
+        <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1C1UlGOz7mnOm8C_9tfUm0IQhpKHN-oMU/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Talking Head 1" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Talking Head 1</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1oLyeCP3-OvrnYQI4DWwFFhLVXlZN-Hd7/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Talking Head 2" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Talking Head 2</h3>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb" data-src="https://drive.google.com/file/d/1Ls13cTyXHMEnuSbEnRweWMp9IIaYVgn4/preview">
+            <div class="play-overlay">
+              <div class="play-actions">
+                <button type="button" class="action-btn primary btn-play" aria-label="Play Talking Head Sample" title="Play">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3>Talking Head Sample</h3>
+          </div>
+        </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+<section class="cta-section">
+    <div class="container">
+      <h2>Ready to Start Your Project?</h2>
+      <p>Let’s create something amazing together.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg">Get Free Consultation</a>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="images/pic.jpg" alt="Aliven Solutions" />
+            <span>ALIVEN <strong>SOLUTIONS</strong></span>
+          </a>
+          <p>Web Development | App Development | Video Editing | Graphic Design | Digital Marketing | PPC | SEO | AI Services | Animation</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/alivensolutions/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100065460550997&sk=directory_contact_info"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/aliven-solutions" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:alivensolutions@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#web">Web Development</a></li>
+            <li><a href="services.html#app">App Development</a></li>
+            <li><a href="services.html#video">Video Editing</a></li>
+            <li><a href="services.html#graphic">Graphic Design</a></li>
+            <li><a href="services.html#digital">Digital Marketing</a></li>
+            <li><a href="services.html#seo">SEO</a></li>
+            <li><a href="services.html#ai">AI Services</a></li>
+            <li><a href="services.html#animation">Animation</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact Info</h4>
+          <ul>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:alivensolutions@gmail.com">info@alivensolutions.com</a></li>
+            <li><i class="fas fa-globe"></i> <a href="https://alivensolutions.com">alivensolutions.com</a></li>
+            <li><i class="fas fa-map-marker-alt"></i> 8600 River Way Unit 9, Berrien Springs, MI 49104</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Aliven Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+
+<script>
+(function(){
+  function stopAll(){
+    document.querySelectorAll('.video-thumb.playing').forEach(function(other){
+      other.classList.remove('playing');
+      var ifr = other.querySelector('iframe');
+      if (ifr) ifr.remove();
+      var mask = other.querySelector('.drive-mask');
+      if (mask) mask.remove();
+      var cur = document.fullscreenElement || document.webkitFullscreenElement;
+      if (cur === other) {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      }
+    });
+  }
+
+  function playThumb(thumb){
+    var src = thumb.getAttribute('data-src');
+    if (!src) return;
+    stopAll();
+
+    var iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.allow = 'autoplay; encrypted-media; fullscreen';
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.setAttribute('webkitallowfullscreen', '');
+    iframe.setAttribute('mozallowfullscreen', '');
+    iframe.setAttribute('scrolling', 'no');
+    thumb.appendChild(iframe);
+
+    var mask = document.createElement('div');
+    mask.className = 'drive-mask';
+    thumb.appendChild(mask);
+
+    thumb.classList.add('playing');
+  }
+
+  document.querySelectorAll('.video-thumb[data-src]').forEach(function(thumb){
+    var m = thumb.getAttribute('data-src').match(/\/d\/([^\/]+)/);
+    if (!m) return;
+    var id = m[1];
+    var img = new Image();
+    img.className = 'thumb-img';
+    img.alt = '';
+    img.loading = 'lazy';
+    img.referrerPolicy = 'no-referrer';
+    var tried = 0;
+    var urls = [
+      'https://drive.google.com/thumbnail?id=' + id + '&sz=w640',
+      'https://lh3.googleusercontent.com/d/' + id + '=w640'
+    ];
+    img.onerror = function(){
+      tried++;
+      if (tried < urls.length) img.src = urls[tried];
+      else img.remove();
+    };
+    img.src = urls[0];
+    thumb.insertBefore(img, thumb.firstChild);
+  });
+
+  document.querySelectorAll('.video-thumb').forEach(function(thumb){
+    var playBtn = thumb.querySelector('.btn-play');
+    if (playBtn) {
+      playBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        playThumb(thumb);
+      });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

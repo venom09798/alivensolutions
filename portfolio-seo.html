@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEO Portfolio | Aliven Solutions</title>
+  <meta name="description" content="SEO case studies and ranking improvements by Aliven Solutions." />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .seo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .seo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .seo-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+    .seo-card-img {
+      aspect-ratio: 16 / 9;
+      background: #0f0a18;
+      overflow: hidden;
+    }
+    .seo-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    .seo-card:hover .seo-card-img img {
+      transform: scale(1.04);
+    }
+    .seo-card-body {
+      padding: 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .seo-card-body h3 {
+      margin-bottom: 6px;
+      font-size: 1.15rem;
+      color: #fff;
+    }
+    .seo-card-body p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    .seo-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .cat-tag {
+      display: inline-block;
+      background: rgba(124, 58, 237, 0.15);
+      color: var(--primary-light);
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .seo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gradient);
+      color: #fff !important;
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      align-self: flex-start;
+    }
+    .seo-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(124, 58, 237, 0.35);
+      color: #fff !important;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary-light);
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+    .back-link:hover { gap: 12px; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-left">
+        <a href="mailto:alivensolutions@gmail.com"><i class="fas fa-envelope"></i> info@alivensolutions.com</a>
+        <span><i class="fas fa-map-marker-alt"></i> 8600 River Way Unit 9, Berrien Springs, MI 49104</span>
+      </div>
+      <div class="top-right">
+        <a href="https://www.instagram.com/alivensolutions/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=100065460550997&sk=directory_contact_info"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.linkedin.com/company/aliven-solutions" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:alivensolutions@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <img src="images/pic.jpg" alt="Aliven Solutions" />
+        <span>ALIVEN <strong>SOLUTIONS</strong></span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html" class="active">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a href="contact.html" class="btn btn-primary nav-cta">Get A Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <section class="page-hero">
+    <div class="container">
+      <h1>SEO Portfolio</h1>
+      <p>Search engine optimization projects that drove organic growth.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <a href="portfolio.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+
+      <div class="seo-grid">
+
+        <div class="seo-card">
+          <div class="seo-card-img">
+            <img src="images/portfolio/seo/jess-monthly.jpg" alt="Jess Hypnotherapy Monthly Reports" loading="lazy" />
+          </div>
+          <div class="seo-card-body">
+            <h3>Jess Hypnotherapy &amp; Health</h3>
+            <p>Monthly SEO performance reports — Search Console metrics, rankings and progress tracking.</p>
+            <div class="seo-tags"><span class="cat-tag">Monthly Report</span><span class="cat-tag">Organic Growth</span></div>
+            <a href="seo-reports/jess-hypnotherapy-monthly.pdf" target="_blank" rel="noopener" class="seo-btn"><i class="fas fa-file-pdf"></i> View Report</a>
+          </div>
+        </div>
+
+        <div class="seo-card">
+          <div class="seo-card-img">
+            <img src="images/portfolio/seo/jess-audit.jpg" alt="Jess Hypnotherapy Audit Report" loading="lazy" />
+          </div>
+          <div class="seo-card-body">
+            <h3>Jess Hypnotherapy — SEO Audit</h3>
+            <p>Full technical, on-page and off-page SEO audit with actionable recommendations.</p>
+            <div class="seo-tags"><span class="cat-tag">SEO Audit</span><span class="cat-tag">Technical SEO</span></div>
+            <a href="seo-reports/jess-hypnotherapy-audit.pdf" target="_blank" rel="noopener" class="seo-btn"><i class="fas fa-file-pdf"></i> View Report</a>
+          </div>
+        </div>
+
+        <div class="seo-card">
+          <div class="seo-card-img">
+            <img src="images/portfolio/seo/jack-audit.jpg" alt="Jack Harbour Counselling Audit" loading="lazy" />
+          </div>
+          <div class="seo-card-body">
+            <h3>Jack Harbour Counselling</h3>
+            <p>Comprehensive SEO audit for a counselling practice — site health and ranking strategy.</p>
+            <div class="seo-tags"><span class="cat-tag">SEO Audit</span><span class="cat-tag">Local SEO</span></div>
+            <a href="seo-reports/jack-counselling-audit.pdf" target="_blank" rel="noopener" class="seo-btn"><i class="fas fa-file-pdf"></i> View Report</a>
+          </div>
+        </div>
+
+        <div class="seo-card">
+          <div class="seo-card-img">
+            <img src="images/portfolio/seo/grate-monthly.jpg" alt="Grate Addition Monthly Reports" loading="lazy" />
+          </div>
+          <div class="seo-card-body">
+            <h3>Grate Addition</h3>
+            <p>Ongoing monthly SEO reports tracking traffic, keywords and conversions.</p>
+            <div class="seo-tags"><span class="cat-tag">Monthly Report</span><span class="cat-tag">Performance</span></div>
+            <a href="seo-reports/grate-addition-monthly.pdf" target="_blank" rel="noopener" class="seo-btn"><i class="fas fa-file-pdf"></i> View Report</a>
+          </div>
+        </div>
+
+        <div class="seo-card">
+          <div class="seo-card-img">
+            <img src="images/portfolio/seo/grate-audit.jpg" alt="Grate Addition Audit Report" loading="lazy" />
+          </div>
+          <div class="seo-card-body">
+            <h3>Grate Addition — SEO Audit</h3>
+            <p>In-depth SEO audit covering technical issues, content gaps and off-page opportunities.</p>
+            <div class="seo-tags"><span class="cat-tag">SEO Audit</span><span class="cat-tag">On-Page SEO</span></div>
+            <a href="seo-reports/grate-addition-audit.pdf" target="_blank" rel="noopener" class="seo-btn"><i class="fas fa-file-pdf"></i> View Report</a>
+          </div>
+        </div>
+
+        <div class="seo-card">
+          <div class="seo-card-img">
+            <img src="images/portfolio/seo/blackthorn-monthly.jpg" alt="Blackthorn of Kent Monthly Reports" loading="lazy" />
+          </div>
+          <div class="seo-card-body">
+            <h3>Blackthorn of Kent</h3>
+            <p>Monthly SEO reporting for Blackthorn of Kent — rankings and organic visibility.</p>
+            <div class="seo-tags"><span class="cat-tag">Monthly Report</span><span class="cat-tag">Local SEO</span></div>
+            <a href="seo-reports/blackthorn-monthly.pdf" target="_blank" rel="noopener" class="seo-btn"><i class="fas fa-file-pdf"></i> View Report</a>
+          </div>
+        </div>
+
+        <div class="seo-card">
+          <div class="seo-card-img">
+            <img src="images/portfolio/seo/blackthorn-audit.jpg" alt="Blackthorn of Kent Audit Report" loading="lazy" />
+          </div>
+          <div class="seo-card-body">
+            <h3>Blackthorn of Kent — SEO Audit</h3>
+            <p>Full SEO audit with technical, on-page and off-page analysis for Blackthorn of Kent.</p>
+            <div class="seo-tags"><span class="cat-tag">SEO Audit</span><span class="cat-tag">Off-Page SEO</span></div>
+            <a href="seo-reports/blackthorn-audit.pdf" target="_blank" rel="noopener" class="seo-btn"><i class="fas fa-file-pdf"></i> View Report</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Start Your Project?</h2>
+      <p>Let’s create something amazing together.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg">Get Free Consultation</a>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="images/pic.jpg" alt="Aliven Solutions" />
+            <span>ALIVEN <strong>SOLUTIONS</strong></span>
+          </a>
+          <p>Web Development | App Development | Video Editing | Graphic Design | Digital Marketing | PPC | SEO | AI Services | Animation</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/alivensolutions/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100065460550997&sk=directory_contact_info"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/aliven-solutions" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:alivensolutions@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#web">Web Development</a></li>
+            <li><a href="services.html#app">App Development</a></li>
+            <li><a href="services.html#video">Video Editing</a></li>
+            <li><a href="services.html#graphic">Graphic Design</a></li>
+            <li><a href="services.html#digital">Digital Marketing</a></li>
+            <li><a href="services.html#seo">SEO</a></li>
+            <li><a href="services.html#ai">AI Services</a></li>
+            <li><a href="services.html#animation">Animation</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact Info</h4>
+          <ul>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:alivensolutions@gmail.com">info@alivensolutions.com</a></li>
+            <li><i class="fas fa-globe"></i> <a href="https://alivensolutions.com">alivensolutions.com</a></li>
+            <li><i class="fas fa-map-marker-alt"></i> 8600 River Way Unit 9, Berrien Springs, MI 49104</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Aliven Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

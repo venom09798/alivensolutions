@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graphic Design Portfolio | Aliven Solutions</title>
+  <meta name="description" content="Graphic design and branding work by Aliven Solutions." />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .graphic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+    .graphic-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .graphic-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+    .graphic-card-img {
+      aspect-ratio: 1 / 1;
+      background: #0f0a18;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .graphic-card-img.wide {
+      aspect-ratio: 16 / 10;
+    }
+    .graphic-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .graphic-card:hover .graphic-card-img img {
+      transform: scale(1.04);
+    }
+    .graphic-card-body {
+      padding: 20px 22px;
+    }
+    .graphic-card-body h3 {
+      margin-bottom: 6px;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+    .graphic-card-body p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-bottom: 12px;
+    }
+    .cat-tag {
+      display: inline-block;
+      background: rgba(124, 58, 237, 0.15);
+      color: var(--primary-light);
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary-light);
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+    .back-link:hover { gap: 12px; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-left">
+        <a href="mailto:alivensolutions@gmail.com"><i class="fas fa-envelope"></i> info@alivensolutions.com</a>
+        <span><i class="fas fa-map-marker-alt"></i> 8600 River Way Unit 9, Berrien Springs, MI 49104</span>
+      </div>
+      <div class="top-right">
+        <a href="https://www.instagram.com/alivensolutions/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=100065460550997&sk=directory_contact_info"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.linkedin.com/company/aliven-solutions" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:alivensolutions@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <img src="images/pic.jpg" alt="Aliven Solutions" />
+        <span>ALIVEN <strong>SOLUTIONS</strong></span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html" class="active">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a href="contact.html" class="btn btn-primary nav-cta">Get A Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Graphic Design Portfolio</h1>
+      <p>Logos, brand identities and visual creatives we designed.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <a href="portfolio.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+
+      <div class="graphic-grid">
+
+        <div class="graphic-card">
+          <div class="graphic-card-img">
+            <img src="images/portfolio/graphic/cafeteria.jpg" alt="Cafeteria Logo" loading="lazy" />
+          </div>
+          <div class="graphic-card-body">
+            <h3>Cafeteria</h3>
+            <p>Elegant coffee brand logo with cup and steam motif.</p>
+            <span class="cat-tag">Logo Design</span>
+          </div>
+        </div>
+
+        <div class="graphic-card">
+          <div class="graphic-card-img">
+            <img src="images/portfolio/graphic/glowing.jpg" alt="Glowing Beauty Logo" loading="lazy" />
+          </div>
+          <div class="graphic-card-body">
+            <h3>Glowing Beauty</h3>
+            <p>Minimal beauty brand identity with silhouette mark.</p>
+            <span class="cat-tag">Logo Design</span>
+          </div>
+        </div>
+
+        <div class="graphic-card">
+          <div class="graphic-card-img">
+            <img src="images/portfolio/graphic/monxrose.jpg" alt="Monxrose Logo" loading="lazy" />
+          </div>
+          <div class="graphic-card-body">
+            <h3>Monxrose</h3>
+            <p>Modern yarn and rose logo for a creative brand.</p>
+            <span class="cat-tag">Logo Design</span>
+          </div>
+        </div>
+
+        <div class="graphic-card">
+          <div class="graphic-card-img">
+            <img src="images/portfolio/graphic/flamingo.jpg" alt="Flamingo Kids Logo" loading="lazy" />
+          </div>
+          <div class="graphic-card-body">
+            <h3>Flamingo Kids</h3>
+            <p>Fun candy toys and games brand logo.</p>
+            <span class="cat-tag">Logo Design</span>
+          </div>
+        </div>
+
+        <div class="graphic-card">
+          <div class="graphic-card-img">
+            <img src="images/portfolio/graphic/highside.jpg" alt="Highside Apparel Logo" loading="lazy" />
+          </div>
+          <div class="graphic-card-body">
+            <h3>Highside Apparel</h3>
+            <p>Bold skull and racing flags apparel brand mark.</p>
+            <span class="cat-tag">Logo Design</span>
+          </div>
+        </div>
+
+        <div class="graphic-card">
+          <div class="graphic-card-img">
+            <img src="images/portfolio/graphic/dinosaur.jpg" alt="Every Piece Finds Its Match" loading="lazy" />
+          </div>
+          <div class="graphic-card-body">
+            <h3>Every Piece Finds Its Match</h3>
+            <p>Playful character illustration for apparel / merch.</p>
+            <span class="cat-tag">Illustration</span>
+          </div>
+        </div>
+
+        <div class="graphic-card">
+          <div class="graphic-card-img wide">
+            <img src="images/portfolio/graphic/mindset.jpg" alt="Mindset Thumbnail" loading="lazy" />
+          </div>
+          <div class="graphic-card-body">
+            <h3>5 Figures to 6 Figures</h3>
+            <p>YouTube / social thumbnail with mindset theme.</p>
+            <span class="cat-tag">Thumbnail</span>
+          </div>
+        </div>
+
+        <div class="graphic-card">
+          <div class="graphic-card-img wide">
+            <img src="images/portfolio/graphic/brochure.jpg" alt="Finn Brothers Brochure" loading="lazy" />
+          </div>
+          <div class="graphic-card-body">
+            <h3>Finn Brothers Brochure</h3>
+            <p>Tri-fold SEO and digital marketing brochure design.</p>
+            <span class="cat-tag">Print Design</span>
+          </div>
+        </div>
+
+        <div class="graphic-card">
+          <div class="graphic-card-img wide">
+            <img src="images/portfolio/graphic/spiders.jpg" alt="Spider Challenge Thumbnail" loading="lazy" />
+          </div>
+          <div class="graphic-card-body">
+            <h3>Spider Challenge</h3>
+            <p>YouTube-style split thumbnail — horror challenge and product reaction.</p>
+            <span class="cat-tag">Thumbnail</span>
+          </div>
+        </div>
+
+        <div class="graphic-card">
+          <div class="graphic-card-img wide">
+            <img src="images/portfolio/graphic/trap.jpg" alt="Social Media Trap Thumbnail" loading="lazy" />
+          </div>
+          <div class="graphic-card-body">
+            <h3>Social Media Trap</h3>
+            <p>Neon cyber thumbnail linking Instagram, TikTok, Facebook and YouTube.</p>
+            <span class="cat-tag">Thumbnail</span>
+          </div>
+        </div>
+
+        <div class="graphic-card">
+          <div class="graphic-card-img wide">
+            <img src="images/portfolio/graphic/lebron.jpg" alt="LeBron Secret Thumbnail" loading="lazy" />
+          </div>
+          <div class="graphic-card-body">
+            <h3>LeBron — The Secret</h3>
+            <p>Split sports vs secret concept thumbnail for high-CTR content.</p>
+            <span class="cat-tag">Thumbnail</span>
+          </div>
+        </div>
+
+        <div class="graphic-card">
+          <div class="graphic-card-img">
+            <img src="images/portfolio/graphic/mrbeast.jpg" alt="Edit Like Mr Beast Thumbnail" loading="lazy" />
+          </div>
+          <div class="graphic-card-body">
+            <h3>Edit Like MrBeast / Digital Launch Pad</h3>
+            <p>Course and creator promo thumbnail pair design.</p>
+            <span class="cat-tag">Thumbnail</span>
+          </div>
+        </div>
+
+        <div class="graphic-card">
+          <div class="graphic-card-img wide">
+            <img src="images/portfolio/graphic/tenthousand.jpg" alt="$10,000 A Month Thumbnail" loading="lazy" />
+          </div>
+          <div class="graphic-card-body">
+            <h3>$10,000 A Month</h3>
+            <p>Money and dashboard style promo thumbnail for free training offer.</p>
+            <span class="cat-tag">Thumbnail</span>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Start Your Project?</h2>
+      <p>Let’s create something amazing together.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg">Get Free Consultation</a>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="images/pic.jpg" alt="Aliven Solutions" />
+            <span>ALIVEN <strong>SOLUTIONS</strong></span>
+          </a>
+          <p>Web Development | App Development | Video Editing | Graphic Design | Digital Marketing | PPC | SEO | AI Services | Animation</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/alivensolutions/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100065460550997&sk=directory_contact_info"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/aliven-solutions" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:alivensolutions@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#web">Web Development</a></li>
+            <li><a href="services.html#app">App Development</a></li>
+            <li><a href="services.html#video">Video Editing</a></li>
+            <li><a href="services.html#graphic">Graphic Design</a></li>
+            <li><a href="services.html#digital">Digital Marketing</a></li>
+            <li><a href="services.html#seo">SEO</a></li>
+            <li><a href="services.html#ai">AI Services</a></li>
+            <li><a href="services.html#animation">Animation</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact Info</h4>
+          <ul>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:alivensolutions@gmail.com">info@alivensolutions.com</a></li>
+            <li><i class="fas fa-globe"></i> <a href="https://alivensolutions.com">alivensolutions.com</a></li>
+            <li><i class="fas fa-map-marker-alt"></i> 8600 River Way Unit 9, Berrien Springs, MI 49104</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Aliven Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
