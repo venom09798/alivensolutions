@@ -97,12 +97,16 @@
 
         <div class="contact-form">
           <h3 style="margin-bottom: 24px;">Send Us a Message</h3>
-          <form id="contactFormLive">
-            <!-- Web3Forms settings -->
+          
+          <!-- Standard Direct Web3Forms Action -->
+          <form action="https://api.web3forms.com/submit" method="POST">
+            
+            <!-- Web3Forms Access Key -->
             <input type="hidden" name="access_key" value="1de928fa-f00a-4878-ac8d-cd3aba40ab5d" />
             <input type="hidden" name="subject" value="New message from Aliven Solutions website" />
             <input type="hidden" name="from_name" value="Aliven Solutions Website" />
-            <!-- Spam trap: real users never see or fill this -->
+            
+            <!-- Spam Trap -->
             <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
 
             <div class="form-row">
@@ -139,9 +143,9 @@
               <label for="message">Your Message</label>
               <textarea id="message" name="message" required placeholder="Tell us about your project..."></textarea>
             </div>
-            <button type="submit" id="sendBtn" class="btn btn-primary" style="width: 100%; justify-content: center;">Send Message</button>
-            <p id="formStatus" role="status" style="margin-top: 16px; font-size: 0.95rem; text-align: center; display: none;"></p>
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Send Message</button>
           </form>
+
         </div>
       </div>
     </div>
@@ -181,7 +185,7 @@
             <li><a href="services.html#video">Video Editing</a></li>
             <li><a href="services.html#graphic">Graphic Design</a></li>
             <li><a href="services.html#digital">Digital Marketing</a></li>
-            <li><a href="services.html#ppc">PPC</a></li>
+            <li><a href="services.html#ppc">PPC</i></a></li>
             <li><a href="services.html#seo">SEO</a></li>
             <li><a href="services.html#ai">AI Services</a></li>
             <li><a href="services.html#animation">Animation</a></li>
@@ -203,63 +207,5 @@
   </footer>
 
   <script src="js/main.js"></script>
-  <script>
-    (function () {
-      var form = document.getElementById('contactFormLive');
-      var btn = document.getElementById('sendBtn');
-      var status = document.getElementById('formStatus');
-
-      function show(msg, ok) {
-        status.style.display = 'block';
-        status.style.color = ok ? '#4ade80' : '#f87171';
-        status.textContent = msg;
-      }
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        
-        var formData = new FormData(form);
-        var object = {};
-        formData.forEach(function(value, key){
-            object[key] = value;
-        });
-
-        var sel = document.getElementById('service');
-        object['service'] = sel.value ? sel.options[sel.selectedIndex].text : 'Not selected';
-
-        var jsonPayload = JSON.stringify(object);
-
-        var original = btn.textContent;
-        btn.disabled = true;
-        btn.textContent = 'Sending...';
-        status.style.display = 'none';
-
-        fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json' 
-          },
-          body: jsonPayload
-        })
-          .then(function (res) { return res.json(); })
-          .then(function (json) {
-            if (json.success) {
-              show('Thank you! Your message has been sent. We will get back to you soon.', true);
-              form.reset();
-            } else {
-              show('Sorry, something went wrong. Please email us at info@alivensolutions.com.', false);
-            }
-          })
-          .catch(function () {
-            show('Network error. Please try again or email us at info@alivensolutions.com.', false);
-          })
-          .finally(function () {
-            btn.disabled = false;
-            btn.textContent = original;
-          });
-      });
-    })();
-  </script>
 </body>
 </html>
