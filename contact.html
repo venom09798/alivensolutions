@@ -123,16 +123,16 @@
               <label for="service">Service Interested In</label>
               <select id="service" name="service">
                 <option value="">Select a service</option>
-                <option value="web">Web Development</option>
-                <option value="app">Application Development</option>
-                <option value="video">Video Editing</option>
-                <option value="graphic">Graphic Design</option>
-                <option value="digital">Digital Marketing</option>
-                <option value="ppc">PPC</option>
-                <option value="seo">SEO</option>
-                <option value="ai">AI Services</option>
-                <option value="animation">Animation</option>
-                <option value="other">Other</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Application Development">Application Development</option>
+                <option value="Video Editing">Video Editing</option>
+                <option value="Graphic Design">Graphic Design</option>
+                <option value="Digital Marketing">Digital Marketing</option>
+                <option value="PPC">PPC</option>
+                <option value="SEO">SEO</option>
+                <option value="AI Services">AI Services</option>
+                <option value="Animation">Animation</option>
+                <option value="Other">Other</option>
               </select>
             </div>
             <div class="form-group">
@@ -201,6 +201,7 @@
       </div>
     </div>
   </footer>
+
   <script src="js/main.js"></script>
   <script>
     (function () {
@@ -216,10 +217,17 @@
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
-        var data = new FormData(form);
+        
+        var formData = new FormData(form);
+        var object = {};
+        formData.forEach(function(value, key){
+            object[key] = value;
+        });
 
         var sel = document.getElementById('service');
-        data.set('service', sel.value ? sel.options[sel.selectedIndex].text : 'Not selected');
+        object['service'] = sel.value ? sel.options[sel.selectedIndex].text : 'Not selected';
+
+        var jsonPayload = JSON.stringify(object);
 
         var original = btn.textContent;
         btn.disabled = true;
@@ -228,8 +236,11 @@
 
         fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: data
+          headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json' 
+          },
+          body: jsonPayload
         })
           .then(function (res) { return res.json(); })
           .then(function (json) {
