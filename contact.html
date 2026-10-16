@@ -97,15 +97,15 @@
 
         <div class="contact-form">
           <h3 style="margin-bottom: 24px;">Send Us a Message</h3>
-          
-          <!-- Standard Direct Web3Forms Action -->
-          <form action="https://api.web3forms.com/submit" method="POST">
-            
+
+          <!-- Web3Forms (submitted via js/main.js, with direct POST as fallback) -->
+          <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+
             <!-- Web3Forms Access Key -->
             <input type="hidden" name="access_key" value="1de928fa-f00a-4878-ac8d-cd3aba40ab5d" />
             <input type="hidden" name="subject" value="New message from Aliven Solutions website" />
             <input type="hidden" name="from_name" value="Aliven Solutions Website" />
-            
+
             <!-- Spam Trap -->
             <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
 
@@ -144,6 +144,7 @@
               <textarea id="message" name="message" required placeholder="Tell us about your project..."></textarea>
             </div>
             <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Send Message</button>
+            <p id="formStatus" role="status" aria-live="polite" style="text-align:center; margin-top:16px;"></p>
           </form>
 
         </div>
@@ -185,7 +186,7 @@
             <li><a href="services.html#video">Video Editing</a></li>
             <li><a href="services.html#graphic">Graphic Design</a></li>
             <li><a href="services.html#digital">Digital Marketing</a></li>
-            <li><a href="services.html#ppc">PPC</i></a></li>
+            <li><a href="services.html#ppc">PPC</a></li>
             <li><a href="services.html#seo">SEO</a></li>
             <li><a href="services.html#ai">AI Services</a></li>
             <li><a href="services.html#animation">Animation</a></li>
