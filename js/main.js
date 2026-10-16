@@ -1,4 +1,3 @@
-// Navbar scroll effect
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   if (window.scrollY > 50) {
@@ -8,7 +7,6 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Mobile menu
 const menuToggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
 if (menuToggle) {
@@ -17,7 +15,6 @@ if (menuToggle) {
   });
 }
 
-// FAQ accordion
 document.querySelectorAll('.faq-question').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.parentElement;
@@ -27,7 +24,6 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 });
 
-// Counter animation
 const counters = document.querySelectorAll('.counter');
 const animateCounters = () => {
   counters.forEach(counter => {
@@ -61,18 +57,41 @@ const observer = new IntersectionObserver((entries) => {
 const statsSection = document.querySelector('.stats');
 if (statsSection) observer.observe(statsSection);
 
-// Contact form (demo)
+// Contact form (Web3Forms)
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  const statusMsg = document.getElementById('formStatus');
+
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = contactForm.querySelector('button[type="submit"]');
-    btn.textContent = 'Message Sent!';
-    btn.style.background = '#10b981';
-    contactForm.reset();
-    setTimeout(() => {
-      btn.textContent = 'Send Message';
-      btn.style.background = '';
-    }, 3000);
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    statusMsg.textContent = '';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(contactForm)
+      });
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        statusMsg.textContent = 'Thank you! Your message has been sent. We will get back to you soon.';
+        statusMsg.style.color = '#22c55e';
+        contactForm.reset();
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      statusMsg.textContent = 'Something went wrong. Please email us at info@alivensolutions.com';
+      statusMsg.style.color = '#ef4444';
+      console.error(err);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
   });
 }
