@@ -131,56 +131,10 @@ img {
   font-size: 1.05rem;
 }
 
-/* Top Bar */
+/* Top Bar removed from the site.
+   Hidden so any page that still has the old markup stays clean. */
 .top-bar {
-  background: #08040f;
-  padding: 10px 0;
-  font-size: 0.85rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.top-bar .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.top-left {
-  display: flex;
-  gap: 24px;
-}
-
-.top-left a, .top-left span {
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.top-left a:hover {
-  color: var(--primary-light);
-}
-
-.top-right {
-  display: flex;
-  gap: 12px;
-}
-
-.top-right a {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(124, 58, 237, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-light);
-  font-size: 0.85rem;
-}
-
-.top-right a:hover {
-  background: var(--primary);
-  color: #fff;
+  display: none;
 }
 
 /* Navbar */
@@ -1177,9 +1131,6 @@ img {
     padding: 24px;
     border-bottom: 1px solid var(--border);
     gap: 16px;
-  }
-  .top-left span {
-    display: none;
   }
   .section {
     padding: 70px 0;
